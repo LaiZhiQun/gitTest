@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+    <ul></ul>
+  </div>
+  <input type="text" id="inputByAdd">
+  <button type="button" id="buttonByAdd">新增</button>
+  <script>
+    // 資料
+    const data = [
+      {
+        id: 1,
+        content: '我是卡斯伯'
+      },
+      {
+        id: 2,
+        content: '我是小明'
+      }
+    ];
+
+    const app = document.querySelector('#app ul');
+    const input = document.querySelector('#inputByAdd');
+    const addBtn = document.querySelector('#buttonByAdd');
+    function renderData() {
+      let str = ''
+      data.forEach(item => {
+        str += `<li>${item.content}<button id="delete" data-id="${item.id}">刪除</button></li>`
+      })
+      app.innerHTML = str
+    }
+    renderData()
+    addBtn.addEventListener('click', function (e) {
+      let value = input.value
+      data.push({
+        id: data.length + 1,
+        content: value
+      })
+      renderData()
+      input.value = ''
+    });
+    app.addEventListener('click', function (e) {
+      let id = e.target.id === 'delete' ? Number(e.target.dataset.id) : ''
+      data.forEach((item, index) => {
+        item.id === id ? data.splice(index, 1) : ''
+      })
+      renderData()
+    });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </script>
+</body>
+
+</html>
